@@ -1471,6 +1471,9 @@ class NimbusReviewSerializer(serializers.ModelSerializer):
         is_rollout = data.get("is_rollout")
         application = data.get("application")
 
+        if application == NimbusExperiment.Application.EXPERIMENTER:
+            return data
+
         if min_version == "":
             raise serializers.ValidationError(
                 {

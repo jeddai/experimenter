@@ -23,6 +23,7 @@ def features(request):
                     "sentry_dsn": settings.SENTRY_DSN_NIMBUS_UI,
                     "version": app_version(),
                     "graphql_url": reverse("nimbus-api-graphql"),
+                    "features": request.features,
                 }
             )
         ),

@@ -1,0 +1,20 @@
+about:
+  description: Nimbus Feature Manifest for Experimenter
+channels:
+  - production
+  - staging
+features:
+  test-feature:
+    description: A feature for testing nimbus
+    variables:
+      enabled:
+        description: If the feature is enabled
+        type: Boolean
+        default: false
+      message:
+        description: A message to display
+        type: String
+        default: ''
+types:
+  objects: {}
+  enums: {}

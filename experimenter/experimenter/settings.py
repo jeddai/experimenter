@@ -119,6 +119,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "dockerflow.django.middleware.DockerflowMiddleware",
     "experimenter.openidc.middleware.OpenIDCAuthMiddleware",
+    "experimenter.cirrus.middleware.CirrusMiddleware",
 ]
 
 ROOT_URLCONF = "experimenter.urls"
@@ -477,6 +478,7 @@ KINTO_BUCKET_MAIN = "main"
 KINTO_COLLECTION_NIMBUS_DESKTOP = "nimbus-desktop-experiments"
 KINTO_COLLECTION_NIMBUS_MOBILE = "nimbus-mobile-experiments"
 KINTO_COLLECTION_NIMBUS_PREVIEW = "nimbus-preview"
+KINTO_COLLECTION_NIMBUS_WEB = "nimbus-web-experiments"
 KINTO_ADMIN_URL = config("KINTO_ADMIN_URL", default=urljoin(KINTO_HOST, "/admin/"))
 KINTO_REVIEW_TIMEOUT = config("KINTO_REVIEW_TIMEOUT", cast=int)
 
@@ -523,3 +525,5 @@ EXPERIMENT_SCHEMA_PATH = (
 )
 
 EXPERIMENT_SCHEMA = json.loads(EXPERIMENT_SCHEMA_PATH.read_text())
+
+CIRRUS_URL = config("CIRRUS_URL", default=None)

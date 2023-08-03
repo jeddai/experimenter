@@ -10,6 +10,7 @@ services:
       - db
       - redis
       - kinto
+      - cirrus
     ports:
       - "7001:7001"
     volumes:
@@ -117,8 +118,11 @@ services:
       context: cirrus/server/
       dockerfile: Dockerfile
     env_file: .env
+    links:
+      - kinto
     volumes:
       - ./cirrus/server/:/cirrus
+      - ./experimenter/nimbus.fml.yml:/nimbus.fml.yml
     working_dir: /cirrus
     ports:
       - "8001:8001"

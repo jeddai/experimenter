@@ -10,6 +10,7 @@ export function getDefault() {
     sentry_dsn: "",
     version: "",
     featureFlags: {},
+    features: {},
   };
 }
 

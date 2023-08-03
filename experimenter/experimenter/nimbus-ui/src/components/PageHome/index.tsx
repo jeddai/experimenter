@@ -112,6 +112,8 @@ const PageHome: React.FunctionComponent<PageHomeProps> = () => {
   }>(GET_EXPERIMENTS_QUERY, { fetchPolicy: "network-only" });
   const [searchedData, setSearchedData] =
     useState<getAllExperiments_experiments[]>();
+  const features = config.features as any;
+  console.log(features);
 
   useEffect(() => setSearchedData(data?.experiments), [data]);
   return (
@@ -128,6 +130,12 @@ const PageHome: React.FunctionComponent<PageHomeProps> = () => {
         className="float-left pb-1"
       />
       <h2 className="mb-3 text-left pt-4">Nimbus Experiments </h2>
+      {features["test-feature"]?.enabled ?
+        (<Alert variant="primary" className="mb-4 mt-4">
+          <div>{features["test-feature"]?.message}</div>
+        </Alert>)
+        : null
+      }
       <Alert variant="primary" className="mb-4 mt-4">
         <div>
           <span role="img" aria-label="book emoji">

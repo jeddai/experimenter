@@ -1,0 +1,22 @@
+---
+no-feature-experimenter:
+  description: A dummy feature for experiments that target no feature.
+  owner: chumphreys@mozilla.com
+  applications:
+    - experimenter
+  hasExposure: false
+  variables: {}
+
+test-feature:
+  description: A test feature
+  owner: chumphreys@mozilla.com
+  applications:
+    - experimenter
+  hasExposure: false
+  variables:
+    enabled:
+      type: boolean
+      description: Whether or not this feature is enabled
+    message:
+      type: string
+      description: A message to display

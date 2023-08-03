@@ -15,11 +15,14 @@ class Channel(models.TextChoices):
     ESR = "esr"
     TESTFLIGHT = "testflight"
     AURORA = "aurora"
+    STAGING = "staging"
+    PRODUCTION = "production"
 
 
 class BucketRandomizationUnit(models.TextChoices):
     NORMANDY = "normandy_id"
     NIMBUS = "nimbus_id"
+    USER_ID = "user_id"
 
 
 @dataclass
@@ -124,6 +127,18 @@ APPLICATION_CONFIG_KLAR_IOS = ApplicationConfig(
     randomization_unit=BucketRandomizationUnit.NIMBUS,
 )
 
+APPLICATION_CONFIG_EXPERIMENTER = ApplicationConfig(
+    name="Experimenter",
+    slug="experimenter",
+    app_name="experimenter",
+    channel_app_id={
+        Channel.STAGING: "experimenter",
+        Channel.PRODUCTION: "experimenter",
+    },
+    kinto_collection=settings.KINTO_COLLECTION_NIMBUS_WEB,
+    randomization_unit=BucketRandomizationUnit.USER_ID,
+)
+
 NO_FEATURE_SLUG = [
     "no-feature-focus-android",
     "no-feature-klar-ios",
@@ -132,6 +147,7 @@ NO_FEATURE_SLUG = [
     "no-feature-ios",
     "no-feature-fenix",
     "no-feature-firefox-desktop",
+    "no-feature-experimenter",
 ]
 
 
@@ -154,6 +170,10 @@ class Application(models.TextChoices):
     KLAR_IOS = (
         APPLICATION_CONFIG_KLAR_IOS.slug,
         APPLICATION_CONFIG_KLAR_IOS.name,
+    )
+    EXPERIMENTER = (
+        APPLICATION_CONFIG_EXPERIMENTER.slug,
+        APPLICATION_CONFIG_EXPERIMENTER.name,
     )
 
     @staticmethod
@@ -207,6 +227,7 @@ class NimbusConstants(object):
         Application.KLAR_ANDROID: APPLICATION_CONFIG_KLAR_ANDROID,
         Application.FOCUS_IOS: APPLICATION_CONFIG_FOCUS_IOS,
         Application.KLAR_IOS: APPLICATION_CONFIG_KLAR_IOS,
+        Application.EXPERIMENTER: APPLICATION_CONFIG_EXPERIMENTER,
     }
 
     Channel = Channel
